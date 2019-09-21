@@ -1,0 +1,146 @@
+<div class="container-fluid">
+    <app-page-title title="Users" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card-box">
+                <div class="row">
+                    <div class="col-lg-12 m-0 mb-2">
+                        <button class="btn btn-success float-right" (click)="showAddUser()">
+                            <i class="fas fa-plus mr-1"></i>
+                            Add User
+                        </button>
+                    </div>
+                    <div class="col-lg-12">
+                        <p-table [paginator]="true" [rows]="10" [columns]="userCols" [value]="userList">
+                            <ng-template pTemplate="header" let-columns>
+                                <tr>
+                                    <th *ngFor="let col of columns">
+                                        {{col.header}}
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                <tr>
+                                    <td *ngFor="let col of columns">
+                                        {{rowData[col.field]}}
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-xs btn-info mr-2" (click)="showUpdateUser(rowData)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn  btn-xs btn-danger" (click)="showDeleteUser(rowData)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog [style]="{width: '600px'}" modal="true" [(visible)]="isAdd">
+    <p-header>
+        Add User
+    </p-header>
+    <div class="ui-g">
+        <div class="col-lg-12">
+            <form>
+                <div class="ui-g">
+                    <div class="ui-g-4">
+                        <label for="userName">UserName</label>
+                    </div>
+                    <div class="ui-g-8">
+                        <input type="text" [(ngModel)]="userJson.userName" name="userName" pInputText
+                            class="form-control" placeholder="Please Enter Username">
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-4">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="ui-g-8">
+                        <input type="email" name="email" pInputText [(ngModel)]="userJson.email" class="form-control"
+                            placeholder="Please Enter Email">
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-4">
+                        <label for="userRole">User Role</label>
+                    </div>
+                    <div class="ui-g-8">
+                        <p-radioButton class="mr-2" name="userRole" value="true" label="Admin"
+                            [(ngModel)]="userJson.isAdmin">
+                        </p-radioButton>
+                        <p-radioButton name="userRole" value="false" label="Normal User" [(ngModel)]="userJson.isAdmin">
+                        </p-radioButton>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <p-footer>
+        <button type="button" class="mr-2" pButton icon="fas fa-check" (click)="isAdd=false" label="Save"></button>
+        <button type="button" pButton icon="fas fa-times" (click)="isAdd=false" label="Cancel"
+            class="ui-button-secondary"></button>
+    </p-footer>
+</p-dialog>
+
+
+<p-dialog [style]="{width: '600px'}" modal="true" [(visible)]="isUpdate">
+    <p-header>
+        Edit User
+    </p-header>
+    <div class="ui-g">
+        <div class="col-lg-12">
+            <form>
+                <div class="ui-g">
+                    <div class="ui-g-4">
+                        <label for="userName">UserName</label>
+                    </div>
+                    <div class="ui-g-8">
+                        {{userJson.userName}}
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-4">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="ui-g-8">
+                        <input pInputText [(ngModel)]="userJson.email" type="email" name="email" class="form-control"
+                            placeholder="Please Enter Email">
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-4">
+                        <label for="example-password">User Role</label>
+                    </div>
+                    <div class="ui-g-8">
+                        <p-radioButton class="mr-2" name="group1" value="true" label="Admin"
+                            [(ngModel)]="userJson.isAdmin">
+                        </p-radioButton>
+                        <p-radioButton name="group1" value="false" label="Normal User" [(ngModel)]="userJson.isAdmin">
+                        </p-radioButton>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <p-footer>
+        <button type="button" class="mr-2" pButton icon="fas fa-check" (click)="isUpdate=false" label="Save"></button>
+        <button type="button" pButton icon="fas fa-times" (click)="isUpdate=false" label="Cancel"
+            class="ui-button-secondary"></button>
+    </p-footer>
+</p-dialog>
+
+<p-confirmDialog appendTo="body" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

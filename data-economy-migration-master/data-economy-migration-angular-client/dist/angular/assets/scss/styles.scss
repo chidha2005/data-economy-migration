@@ -1,0 +1,107 @@
+//Core files
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+@import "variables";
+
+.link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.link:hover,
+.link:focus {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+body {
+
+    .ui-widget {
+        font-family: Nunito, sans-serif;
+    }
+
+    .ui-table .ui-table-thead>tr>th,
+    .ui-table .ui-table-tbody>tr>td,
+    .ui-table .ui-table-tfoot>tr>td {
+        padding: .85rem;
+        vertical-align: top;
+        border: none;
+        border-top: 1px solid #f5f6f8;
+    }
+
+    .ui-table .ui-paginator-bottom {
+        border: none;
+    }
+
+    .ui-radiobutton .ui-radiobutton-box {
+        width: 18px;
+        height: 18px;
+    }
+
+    .ui-radiobutton-label {
+        vertical-align: middle;
+    }
+
+    &.authentication-bg-pattern {
+        background-color: #0f90d4;
+
+        .footer {
+            color: #fff !important;
+
+            .text-muted {
+                color: #fff !important;
+            }
+        }
+    }
+
+    @media (min-width: 992px) {
+        #topnav {
+
+            background: #0f90d4;
+
+            .navigation-menu {
+                text-align: center;
+
+                >li {
+                    display: inline-block;
+                    float: none;
+
+                    .submenu li a:hover {
+                        color: #0f90d4;
+                    }
+
+                    >a {
+                        padding: 20px;
+                        color: #fff;
+                        transition: none;
+                        -webkit-transition: none;
+                        -moz-transition: none;
+                        -ms-transition: none;
+                        -o-transition: none;
+                        -webkit-transition: none;
+
+                        i {
+                            display: block;
+                            margin: 0 0 5px 0;
+                            float: none;
+                            text-align: center;
+                        }
+
+                        .arrow-down {
+                            display: none;
+                            margin: 0 0 5px 0;
+                        }
+
+                        &.active {
+                            border-bottom: 3px solid #FFCB08;
+                        }
+                    }
+                }
+            }
+        }
+
+        .wrapper {
+            padding: ($topbar-height + 80px) ($grid-gutter-width / 2) 0 ($grid-gutter-width / 2);
+        }
+    }
+}

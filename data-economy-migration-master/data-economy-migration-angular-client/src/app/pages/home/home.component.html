@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <app-page-title title="Home" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+  <div class="row" *ngFor="let item of chartData;">
+    <div class="col-xl-12">
+      <!-- Portlet card -->
+      <app-portlet title="HIVE to S3" color="white" headerClass="title header-title border-0 my-1 text-center"
+        (onContentRefresh)="contentRefresh()">
+        <div class="card-body text-center pt-0 mt-2">
+          <div class="row">
+            <div class="col-xl-6">
+              <apx-chart [series]="item.requestStatus.series" [chart]="item.requestStatus"
+                [colors]="item.requestStatus.piechartcolor" [title]="item.requestStatus.title"
+                [labels]="item.requestStatus.labels" [dataLabels]="item.requestStatus.dataLabels"
+                [tooltip]="item.requestStatus.tooltip" [legend]="item.requestStatus.legend"
+                [plotOptions]="item.requestStatus.option" [grid]="item.requestStatus.grid">
+              </apx-chart>
+              <div class="row justify-content-center mt-3">
+                <div class="col-2">
+                  <p class="text-muted font-12 mb-1 text-truncate">Not Started</p>
+                  <h5><i class="fas fa-exclamation-circle text-info mr-1"></i>{{item.requestStatus.series[0] + " %" }}
+                  </h5>
+                </div>
+                <div class="col-2">
+                  <p class="text-muted font-12 mb-1 text-truncate">In Progress</p>
+                  <h5><i class="far fa-clock text-warning mr-1"></i>{{item.requestStatus.series[1] + " %" }}</h5>
+                </div>
+                <div class="col-2">
+                  <p class="text-muted font-12 mb-1 text-truncate">Complete</p>
+                  <h5><i class="far fa-check-circle text-success mr-1"></i>{{item.requestStatus.series[2] + " %" }}</h5>
+                </div>
+                <div class="col-2">
+                  <p class="text-muted font-12 mb-1 text-truncate">Error</p>
+                  <h5><i class="far fa-times-circle text-danger mr-1"></i>{{item.requestStatus.series[3] + " %" }}</h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6">
+              <apx-chart [series]="item.reconStatus.series" [chart]="item.reconStatus"
+                [colors]="item.reconStatus.piechartcolor" [title]="item.reconStatus.title"
+                [labels]="item.reconStatus.labels" [dataLabels]="item.reconStatus.dataLabels"
+                [tooltip]="item.reconStatus.tooltip" [legend]="item.reconStatus.legend"
+                [plotOptions]="item.reconStatus.option" [grid]="item.reconStatus.grid">
+              </apx-chart>
+              <div class="row justify-content-center mt-3">
+                <div class="col-2">
+                  <p class="text-muted font-12 mb-1 text-truncate">Not Started</p>
+                  <h5><i class="fas fa-exclamation-circle text-info mr-1"></i>{{item.reconStatus.series[0] + " %" }}
+                  </h5>
+                </div>
+                <div class="col-2">
+                  <p class="text-muted font-12 mb-1 text-truncate">In Progress</p>
+                  <h5><i class="far fa-clock text-warning mr-1"></i>{{item.reconStatus.series[1] + " %" }}</h5>
+                </div>
+                <div class="col-2">
+                  <p class="text-muted font-12 mb-1 text-truncate">Complete</p>
+                  <h5><i class="far fa-check-circle text-success mr-1"></i>{{item.reconStatus.series[2] + " %" }}</h5>
+                </div>
+                <div class="col-2">
+                  <p class="text-muted font-12 mb-1 text-truncate">Error</p>
+                  <h5><i class="far fa-times-circle text-danger mr-1"></i>{{item.reconStatus.series[3] + " %" }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </app-portlet>
+    </div>
+  </div>
+</div>

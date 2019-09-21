@@ -1,0 +1,35 @@
+<div class="topbar-menu">
+    <div class="container-fluid">
+        <div id="navigation" [ngbCollapse]="!showMobileMenu">
+            <!-- Navigation Menu-->
+            <ul class="navigation-menu">
+                <li>
+                    <a routerLink="/app/home" routerLinkActive="active">
+                        <i class="fas fa-home"></i>HOME</a>
+                </li>
+                <li>
+                    <a routerLink="/app/request" routerLinkActive="active">
+                        <i class="fas fa-file-alt"></i>REQUEST</a>
+                </li>
+                <li>
+                    <a routerLink="/app/history" routerLinkActive="active">
+                        <i class="fas fa-history"></i>HISTORY</a>
+                </li>
+                <li>
+                    <a routerLink="/app/recon" routerLinkActive="active">
+                        <i class="fas fa-retweet"></i>RECON</a>
+                </li>
+                <li>
+                    <a routerLink="/app/help" routerLinkActive="active">
+                        <i class="far fa-question-circle"></i>HELP</a>
+                </li>
+
+            </ul>
+            <!-- End navigation menu -->
+            <div class="clearfix"></div>
+        </div>
+        <!-- end #navigation -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end navbar-custom -->

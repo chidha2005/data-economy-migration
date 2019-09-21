@@ -1,0 +1,134 @@
+<div class="container-fluid">
+    <app-page-title title="Request" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card-box">
+                <div class="ui-g mb-2">
+                    <div class="ui-g-3">
+                        <h4 class="header-title text-info">Migration Options</h4>
+                    </div>
+                    <div class="ui-g-9">
+                        <h4 class="header-title text-info">Migration Scope</h4>
+                    </div>
+                </div>
+                <p-tabView styleClass="d-flex" (onChange)="onTabChange($event)" orientation="left">
+                    <p-tabPanel>
+                        <ng-template pTemplate="header">
+                            <p-radioButton name="requestType" label="HIVE TO S3">
+                            </p-radioButton>
+                        </ng-template>
+                        <div class="ui-g">
+                            <div class="ui-g-6">
+                                <div class="ui-g">
+                                    <div class="ui-g-12">
+                                        <label for="labelName">Create Label</label>
+                                    </div>
+                                    <div class="ui-g-12">
+                                        <input name="labelName" pInputText type="text" class="form-control"
+                                            placeholder="Label">
+                                    </div>
+                                </div>
+                                <div class="ui-g">
+                                    <div class="ui-g-12">
+                                        <label for="migrationType">Migration Type</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-fluid">
+                                        <p-dropdown name="migrationType" [options]="migrationTypeOptions"
+                                            [(ngModel)]="migrationType">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+
+                                <div class="ui-g" *ngIf="migrationType=='database'">
+                                    <div class="ui-g-12">
+                                        <label for="databaseName">Database Name</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-fluid">
+                                        <p-dropdown name="databaseName" [options]="databaseOptions"
+                                            [(ngModel)]="databaseName">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                                <div class="ui-g" *ngIf="migrationType=='database'">
+                                    <div class="ui-g-12">
+                                        <label for="targetS3Bucket">Target S3 Bucket</label>
+                                    </div>
+                                    <div class="ui-g-12">
+                                        <input name="targetS3Bucket" pInputText type="text" class="form-control"
+                                            placeholder="Target S3 bucket">
+                                    </div>
+                                </div>
+
+                                <div class="ui-g" *ngIf="migrationType=='file'">
+                                    <div class="ui-g-12">
+                                        <label for="filePath">File Path</label>
+                                    </div>
+                                    <div class="ui-g-12">
+                                        <p-fileUpload #fileUploadRef chooseLabel="Browse" name="filePath"
+                                            customUpload="true" [showCancelButton]="false" [showUploadButton]="false"
+                                            (onSelect)="fileSelectHandler($event,fileUploadRef)">
+                                        </p-fileUpload>
+                                    </div>
+                                </div>
+
+                                <div class="ui-g" *ngIf="migrationType">
+                                    <div class="ui-g-12">
+                                        <label for="tokenizeDataFlag">Tokenize the data before copying?
+                                        </label>
+                                    </div>
+                                    <div class="ui-g-12">
+                                        <p-radioButton name="tokenizeDataFlag" class="mr-1" label="Yes" value="Y"
+                                            [(ngModel)]="tokenizeDataFlag">
+                                        </p-radioButton>
+                                        <p-radioButton name="tokenizeDataFlag" label="No" value="N"
+                                            [(ngModel)]="tokenizeDataFlag">
+                                        </p-radioButton>
+                                    </div>
+                                </div>
+
+                                <div class="ui-g" *ngIf="migrationType">
+                                    <div class="ui-g-12">
+                                        <label for="tokenizefilePath">Tokenization File Path</label>
+                                    </div>
+                                    <div class="ui-g-12">
+                                        <p-fileUpload #tokenizefileUploadRef chooseLabel="Browse"
+                                            name="tokenizefilePath" customUpload="true" [showCancelButton]="false"
+                                            [showUploadButton]="false"
+                                            (onSelect)="tokenizationFileSelectHandler($event,tokenizefileUploadRef)">
+                                        </p-fileUpload>
+                                    </div>
+                                </div>
+
+                                <div class="ui-g mt-2">
+                                    <div class="ui-g-12">
+                                        <button type="submit" class="btn btn-success"
+                                            (click)="onContinueFunction()">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel disabled="true">
+                        <ng-template pTemplate="header">
+                            <p-radioButton disabled="true" name="requestType" label="Teradata TO S3">
+                            </p-radioButton>
+                        </ng-template>
+                    </p-tabPanel>
+                    <p-tabPanel disabled="true">
+                        <ng-template pTemplate="header">
+                            <p-radioButton disabled="true" name="requestType" label="Teradata TO RedShift">
+                            </p-radioButton>
+                        </ng-template>
+                    </p-tabPanel>
+                    <p-tabPanel disabled="true">
+                        <ng-template pTemplate="header">
+                            <p-radioButton disabled="true" name="requestType" label="Teradata TO Snowflake">
+                            </p-radioButton>
+                        </ng-template>
+                    </p-tabPanel>
+                </p-tabView>
+
+            </div>
+        </div>
+    </div>
+</div>

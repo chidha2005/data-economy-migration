@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <app-page-title title="Recon" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+  <div class="row" *ngIf="showMaster">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body mt-2">
+          <p-table #masterTable [columns]="masterCols" [value]="masterList">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns">
+                  {{col.header}}
+                </th>
+              </tr>
+              <tr>
+                <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                  <input *ngSwitchDefault pInputText type="text"
+                    (input)="masterTable.filter($event.target.value, col.field, col.filterMatchMode)">
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr>
+                <td *ngFor="let col of columns" [ngSwitch]="col.field">
+                  <span *ngSwitchCase="'requestNo'">
+                    <a href="javascript: void(0);" class="link"
+                      (click)="openReconDetails(rowData)">{{rowData[col.field]}}</a>
+                  </span>
+                  <span *ngSwitchCase="'status'">
+                    <span *ngIf="rowData.status=='Completed'" class="badge badge-success">Completed</span>
+                    <span *ngIf="rowData.status=='In Process'" class="badge badge-info">In Process</span>
+                    <span *ngIf="rowData.status=='Error'" class="badge badge-danger">Error</span>
+                  </span>
+                  <span *ngSwitchDefault>
+                    {{rowData[col.field]}}
+                  </span>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showDetail">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="float-right d-none d-md-inline-block">
+            <div class="btn-group mb-2">
+              <button class="btn btn-sm btn-secondary" type="button" (click)="cancelDetails()"><i
+                  class="fas fa-arrow-left mr-2"></i>Back</button>
+            </div>
+          </div>
+          <h4 class="header-title">Recon #{{selectedRec.requestNo}}</h4>
+          <p class="text-muted font-13 mb-4">
+          </p>
+          <p-table [columns]="detailCols" [value]="selectedRec.details">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns">
+                  {{col.header}}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr>
+                <td *ngFor="let col of columns" [ngSwitch]="col.field">
+                  <span *ngSwitchCase="'status'">
+                    <span *ngIf="rowData.status=='Completed'" class="badge badge-success">Completed</span>
+                    <span *ngIf="rowData.status=='In Process'" class="badge badge-info">In Process</span>
+                    <span *ngIf="rowData.status=='Error'" class="badge badge-danger">Error</span>
+                  </span>
+                  <span *ngSwitchDefault>
+                    {{rowData[col.field]}}
+                  </span>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
